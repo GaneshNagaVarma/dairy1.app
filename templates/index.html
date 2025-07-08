@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Valley Dairy Farm</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-cow"></i>
+                <span>varma Dairy</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link active">Home</a></li>
+                <li><a href="/products" class="nav-link">Products</a></li>
+                <li><a href="/about" class="nav-link">About</a></li>
+                <li><a href="/shopping" class="nav-link">Shopping</a></li>
+                <li><a href="/orders" class="nav-link">Orders</a></li>
+                <li><a href="/login" class="nav-link">Login</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Welcome to varma Dairy Farm</h1>
+                <p>Premium quality dairy products straight from our farm to your table</p>
+                <button class="cta-button" onclick="window.location.href='/shopping'">Shop Now</button>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2>Why Choose Our Products?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-leaf"></i>
+                        <h3>100% Organic</h3>
+                        <p>All our products are certified organic and natural</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-truck"></i>
+                        <h3>Fresh Delivery</h3>
+                        <p>Daily fresh delivery to your doorstep</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-award"></i>
+                        <h3>Premium Quality</h3>
+                        <p>Award-winning quality products</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <div class="chatbot-toggle" onclick="toggleChat()">
+            <i class="fas fa-comments"></i>
+        </div>
+        <div class="chatbot" id="chatbot">
+            <div class="chatbot-header">
+                <h3>Farm Assistant</h3>
+                <button onclick="toggleChat()" class="close-chat">×</button>
+            </div>
+            <div class="chatbot-messages" id="chatMessages">
+                <div class="bot-message">
+                    <p>Hello! I'm your farm assistant. How can I help you today?</p>
+                    <p>You can say: login, register, products, about, shopping, orders, my details, logout, forgot password</p>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatInput" placeholder="Type your message..." onkeypress="handleEnter(event)">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

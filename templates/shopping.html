@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping - Fresh Valley Dairy Farm</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-cow"></i>
+                <span>Fresh Valley Dairy</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/products" class="nav-link">Products</a></li>
+                <li><a href="/about" class="nav-link">About</a></li>
+                <li><a href="/shopping" class="nav-link active">Shopping</a></li>
+                <li><a href="/orders" class="nav-link">Orders</a></li>
+                <li><a href="/login" class="nav-link">Login</a></li>
+            </ul>
+            <div class="cart-icon" onclick="toggleCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="shopping-page">
+        <div class="container">
+            <h1>Shop Our Products</h1>
+            
+            <div class="shopping-filters">
+                <button class="filter-btn active" onclick="filterShoppingProducts('all')">All Products</button>
+                <button class="filter-btn" onclick="filterShoppingProducts('dairy')">Dairy Products</button>
+                <button class="filter-btn" onclick="filterShoppingProducts('meat')">Meat Products</button>
+            </div>
+
+            <div class="shopping-grid" id="shoppingGrid">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Cart Sidebar -->
+        <div class="cart-sidebar" id="cartSidebar">
+            <div class="cart-header">
+                <h3>Shopping Cart</h3>
+                <button onclick="toggleCart()" class="close-cart">×</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be displayed here -->
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <strong>Total: $<span id="cartTotal">0.00</span></strong>
+                </div>
+                <button class="checkout-btn" onclick="proceedToCheckout()">Proceed to Checkout</button>
+            </div>
+        </div>
+
+        <!-- Product Detail Modal -->
+        <div class="modal" id="productModal">
+            <div class="modal-content">
+                <span class="close" onclick="closeProductModal()">&times;</span>
+                <div id="productDetails">
+                    <!-- Product details will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Checkout Modal -->
+        <div class="modal" id="checkoutModal">
+            <div class="modal-content">
+                <span class="close" onclick="closeCheckoutModal()">&times;</span>
+                <div class="checkout-content">
+                    <h2>Checkout</h2>
+                    <form id="checkoutForm">
+                        <div class="form-group">
+                            <label>Payment Method:</label>
+                            <select id="paymentMethod" required>
+                                <option value="">Select Payment Method</option>
+                                <option value="credit_card">Credit Card</option>
+                                <option value="debit_card">Debit Card</option>
+                                <option value="paypal">PayPal</option>
+                                <option value="cash_on_delivery">Cash on Delivery</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="cardDetails" style="display: none;">
+                            <label>Card Number:</label>
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+                            <label>Expiry Date:</label>
+                            <input type="text" id="expiryDate" placeholder="MM/YY">
+                            <label>CVV:</label>
+                            <input type="text" id="cvv" placeholder="123">
+                        </div>
+                        <div class="form-group">
+                            <label>Delivery Address:</label>
+                            <textarea id="deliveryAddress" required placeholder="Enter your delivery address"></textarea>
+                        </div>
+                        <button type="submit" class="place-order-btn">Place Order</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/shopping.js') }}"></script>
+</body>
+</html>

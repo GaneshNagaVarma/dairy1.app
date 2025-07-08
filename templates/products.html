@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Fresh Valley Dairy Farm</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-cow"></i>
+                <span>Fresh Valley Dairy</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/products" class="nav-link active">Products</a></li>
+                <li><a href="/about" class="nav-link">About</a></li>
+                <li><a href="/shopping" class="nav-link">Shopping</a></li>
+                <li><a href="/orders" class="nav-link">Orders</a></li>
+                <li><a href="/login" class="nav-link">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="products-page">
+        <div class="container">
+            <h1>Our Products</h1>
+            
+            <div class="product-categories">
+                <button class="category-btn active" onclick="filterProducts('all')">All Products</button>
+                <button class="category-btn" onclick="filterProducts('dairy')">Dairy Products</button>
+                <button class="category-btn" onclick="filterProducts('meat')">Meat Products</button>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/products.js') }}"></script>
+</body>
+</html>

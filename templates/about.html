@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Fresh Valley Dairy Farm</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-cow"></i>
+                <span>Fresh Valley Dairy</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/products" class="nav-link">Products</a></li>
+                <li><a href="/about" class="nav-link active">About</a></li>
+                <li><a href="/shopping" class="nav-link">Shopping</a></li>
+                <li><a href="/orders" class="nav-link">Orders</a></li>
+                <li><a href="/login" class="nav-link">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="about-page">
+        <div class="container">
+            <h1>About Fresh Valley Dairy Farm</h1>
+            
+            <section class="farm-story">
+                <div class="story-content">
+                    <h2>Our Story</h2>
+                    <p>Fresh Valley Dairy Farm has been serving the community with premium quality dairy and meat products for over 50 years. Founded in 1970 by the Johnson family, we've maintained our commitment to sustainable farming practices and animal welfare.</p>
+                    <p>Our farm spans over 500 acres of lush green pastures where our happy cows graze freely. We believe that happy animals produce the best quality products, which is why we prioritize their comfort and well-being.</p>
+                </div>
+                <div class="story-image">
+                    <img src="/placeholder.svg?height=400&width=600" alt="Farm landscape">
+                </div>
+            </section>
+
+            <section class="farm-gallery">
+                <h2>Farm Gallery</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="/placeholder.svg?height=300&width=400" alt="Cows grazing">
+                        <h3>Happy Cows</h3>
+                        <p>Our cows enjoy spacious pastures and natural grazing</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/placeholder.svg?height=300&width=400" alt="Milking process">
+                        <h3>Modern Milking</h3>
+                        <p>State-of-the-art milking facilities ensure hygiene and quality</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/placeholder.svg?height=300&width=400" alt="Farm workers">
+                        <h3>Dedicated Team</h3>
+                        <p>Our experienced team ensures the highest standards</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="/placeholder.svg?height=300&width=400" alt="Processing facility">
+                        <h3>Processing Facility</h3>
+                        <p>Clean and modern processing ensures product safety</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="farm-video">
+                <h2>Farm Tour Video</h2>
+                <div class="video-container">
+                    <video controls poster="/placeholder.svg?height=400&width=800">
+                        <source src="farm-tour.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </section>
+
+            <section class="certifications">
+                <h2>Our Certifications</h2>
+                <div class="cert-grid">
+                    <div class="cert-item">
+                        <i class="fas fa-certificate"></i>
+                        <h3>Organic Certified</h3>
+                        <p>USDA Organic Certification</p>
+                    </div>
+                    <div class="cert-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Food Safety</h3>
+                        <p>HACCP Certified Facility</p>
+                    </div>
+                    <div class="cert-item">
+                        <i class="fas fa-heart"></i>
+                        <h3>Animal Welfare</h3>
+                        <p>Certified Humane Treatment</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

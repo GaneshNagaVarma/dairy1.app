@@ -5,7 +5,7 @@ const chatState = {
     loginAttempts: 0,
     awaitingOTP: false,
     awaitingNewPassword: false,
-    tempPhone: null,
+    tempPhone: null, // This variable seems unused after phone is stored in resetPasswordPhone
     tempUsername: null,
     // New chat states for login/register flow
     awaitingUsernameInput: false, // For login username
@@ -17,18 +17,33 @@ const chatState = {
     resetPasswordToken: null, // Stores token after OTP verification
     tempNewPassword: null, // Stores the first new password input during reset flow
     awaitingPasswordConfirm: false, // Flag for new password confirmation
+    // Added for forgot password flow - this was previously just `awaitingPhone` in processChatMessage
+    awaitingForgotPasswordPhone: false,
+    // NEW: State for products page confirmation
+    awaitingProductsPageConfirmation: false,
 };
+
+// Mock product data (replace with actual API fetch in a real application)
+const mockProducts = [
+    { name: "Milk", category: "Dairy", price: 2.50, description: "Fresh cow's milk, 1 liter.", stock_quantity: 100 },
+    { name: "Paneer", category: "Dairy", price: 5.00, description: "Soft cottage cheese, 500g block.", stock_quantity: 50 },
+    { name: "Curd", category: "Dairy", price: 3.00, description: "Homemade style yogurt, 500g.", stock_quantity: 80 },
+    { name: "Batter", category: "Ready Mix", price: 4.00, description: "Idli/Dosa batter, 1kg.", stock_quantity: 70 },
+    { name: "Buttermilk", category: "Dairy", price: 1.50, description: "Refreshing spiced buttermilk, 500ml.", stock_quantity: 90 },
+    { name: "Fish", category: "Seafood", price: 12.00, description: "Fresh catch of the day, 1kg.", stock_quantity: 30 },
+    { name: "Chicken", category: "Meat", price: 10.00, description: "Farm-fresh chicken, whole.", stock_quantity: 40 },
+    { name: "Prawns", category: "Seafood", price: 15.00, description: "Large king prawns, 500g.", stock_quantity: 25 }
+];
+
 
 // Initialize page
 document.addEventListener("DOMContentLoaded", () => {
     checkLoginStatus();
-    loadUserFromStorage();
-    // Update initial bot message on load
     addBotMessage("Hello! I'm your farm assistant, **Bujji**. How can I help you today?");
     addBotMessage("You can say: login, register, products, about, shopping, orders, my details, logout, forgot password.");
 
     // Initial check for products page to display products if on that page
-    if (window.location.pathname === '/products') {
+    if (window.location.pathname === '/products.html' || window.location.pathname === '/products') { // Added .html for robustness
         showProductsOneByOne();
     }
 });
@@ -43,20 +58,17 @@ function checkLoginStatus() {
     }
 }
 
-// Load user data from localStorage (redundant with checkLoginStatus but harmless)
-function loadUserFromStorage() {
-    const user = localStorage.getItem("currentUser");
-    if (user) {
-        currentUser = JSON.parse(user);
-    }
-}
-
 // Update UI for logged in user
 function updateUIForLoggedInUser() {
-    const loginLink = document.querySelector('a[href="/login"]');
+    const loginLink = document.querySelector('a[href="/login"]'); // Assuming /login is the default login page
     if (loginLink && currentUser) {
         loginLink.textContent = `Welcome, ${currentUser.username}`;
         loginLink.href = "#"; // Make it not navigate, as user is already logged in
+    }
+    // Also update the chat input placeholder if needed
+    const chatInput = document.getElementById("chatInput");
+    if (chatInput) {
+        chatInput.placeholder = chatState.isLoggedIn ? "Type your message..." : "Type your message..."; // Can be customized
     }
 }
 
@@ -123,8 +135,7 @@ function processChatMessage(lowerCaseMessage, originalMessage) {
     // --- State-based message handling (highest priority) ---
 
     // Handle Forgot Password flow
-    // Changed 'awaitingPhone' to 'chatState.awaitingPhone' for consistency and clarity
-    if (chatState.awaitingPhone) {
+    if (chatState.awaitingForgotPasswordPhone) {
         handleForgotPasswordPhone(originalMessage);
         return;
     }
@@ -162,6 +173,23 @@ function processChatMessage(lowerCaseMessage, originalMessage) {
     if (chatState.awaitingRegisterData) {
         handleRegisterInput(originalMessage);
         return;
+    }
+
+    // --- Handle confirmation for "products" navigation ---
+    if (chatState.awaitingProductsPageConfirmation) {
+        if (lowerCaseMessage === 'yes') {
+            addBotMessage("Alright, redirecting you to the products page!");
+            chatState.awaitingProductsPageConfirmation = false;
+            setTimeout(() => {
+                window.location.href = "/products"; // Ensure this matches your actual products page
+            }, 1000);
+        } else if (lowerCaseMessage === 'no') {
+            addBotMessage("Okay, I won't redirect you to the products page at this time.");
+            chatState.awaitingProductsPageConfirmation = false;
+        } else {
+            addBotMessage("I didn't understand. Do you want to go to the products page? Please say 'yes' or 'no'.");
+        }
+        return; // Important: Consume the message if we are in this state
     }
 
     // --- Command-based message handling (if no state is active) ---
@@ -208,7 +236,7 @@ function processChatMessage(lowerCaseMessage, originalMessage) {
         return;
     }
 
-    // Handle my orders - MODIFIED LOGIC
+    // Handle my orders
     if (lowerCaseMessage.includes("my orders") || lowerCaseMessage.includes("my order")) {
         if (chatState.isLoggedIn) {
             // Directly call fetchAndShowOrders, which will handle redirection
@@ -219,13 +247,12 @@ function processChatMessage(lowerCaseMessage, originalMessage) {
         return; // Important: return after handling
     }
 
-    // Handle products and show available products
+    // --- MODIFIED: Handle products command ---
     if (lowerCaseMessage.includes("products")) {
-        addBotMessage("Redirecting to products page...");
-        setTimeout(() => {
-            window.location.href = "/products";
-        }, 1000);
-        return;
+        addBotMessage("Fetching product list...");
+        // Call the function to display products directly in the chat window
+        fetchAndDisplayProductsInChat(); // This will now display one-by-one and then set confirmation state
+        return; // Important: return here as fetchAndDisplayProductsInChat will manage next state
     }
 
     // Handle cart
@@ -256,6 +283,13 @@ function processChatMessage(lowerCaseMessage, originalMessage) {
         }
         return;
     }
+    
+    if (lowerCaseMessage.includes("product")) {
+        addBotMessage("Redirecting to product page...");
+        setTimeout(() => (window.location.href = "/products"), 1000);
+        return;
+    }
+
 
     // Default response
     addBotMessage(
@@ -268,6 +302,14 @@ function startLoginProcess() {
     addBotMessage("To log in, please enter your username:");
     chatState.awaitingUsernameInput = true;
     chatState.loginAttempts = 0; // Reset attempts for a new login process
+    // Ensure other states are cleared when starting a new login process
+    chatState.awaitingPasswordInput = false;
+    chatState.awaitingRegisterData = false;
+    chatState.awaitingForgotPasswordPhone = false;
+    chatState.awaitingOTP = false;
+    chatState.awaitingNewPassword = false;
+    chatState.awaitingPasswordConfirm = false;
+    chatState.awaitingProductsPageConfirmation = false; // Clear this state too
 }
 
 async function performLogin(username, password) {
@@ -323,6 +365,14 @@ function startRegisterProcess() {
     chatState.awaitingRegisterData = true;
     chatState.registerStep = "username";
     chatState.registerData = {}; // Clear any previous registration data
+    // Clear other states when starting registration
+    chatState.awaitingUsernameInput = false;
+    chatState.awaitingPasswordInput = false;
+    chatState.awaitingForgotPasswordPhone = false;
+    chatState.awaitingOTP = false;
+    chatState.awaitingNewPassword = false;
+    chatState.awaitingPasswordConfirm = false;
+    chatState.awaitingProductsPageConfirmation = false; // Clear this state too
 }
 
 async function handleRegisterInput(message) {
@@ -435,13 +485,20 @@ async function performRegistration(userData) {
 // --- Forgot Password Process Functions ---
 function startForgotPasswordProcess() {
     addBotMessage("To reset your password, please enter your **phone number** linked to your account:");
-    chatState.awaitingPhone = true;
+    chatState.awaitingForgotPasswordPhone = true; // Corrected state name
     chatState.resetPasswordPhone = null;
     chatState.resetPasswordToken = null;
     chatState.awaitingOTP = false;
     chatState.awaitingNewPassword = false;
     chatState.awaitingPasswordConfirm = false;
     chatState.tempNewPassword = null;
+    // Clear other unrelated states
+    chatState.awaitingUsernameInput = false;
+    chatState.awaitingPasswordInput = false;
+    chatState.awaitingRegisterData = false;
+    chatState.registerStep = null;
+    chatState.registerData = {};
+    chatState.awaitingProductsPageConfirmation = false; // Clear this state too
 }
 
 async function handleForgotPasswordPhone(phone) {
@@ -462,17 +519,17 @@ async function handleForgotPasswordPhone(phone) {
         const data = await response.json();
         if (response.ok && data.success) {
             addBotMessage("An OTP has been sent to your phone. Please enter the **6-digit OTP**:");
-            chatState.awaitingPhone = false; // Phone received, now awaiting OTP
+            chatState.awaitingForgotPasswordPhone = false; // Phone received, now awaiting OTP
             chatState.awaitingOTP = true;
         } else {
             addBotMessage(`Error: ${data.error || 'Could not send OTP. Please check your phone number and try again.'}`);
-            chatState.awaitingPhone = false; // Reset state if failed to send OTP
+            chatState.awaitingForgotPasswordPhone = false; // Reset state if failed to send OTP
             chatState.resetPasswordPhone = null;
         }
     } catch (error) {
         console.error('Error sending OTP:', error);
         addBotMessage("An error occurred while trying to send OTP. Please try again later.");
-        chatState.awaitingPhone = false;
+        chatState.awaitingForgotPasswordPhone = false; // Reset state on error
         chatState.resetPasswordPhone = null;
     }
 }
@@ -539,7 +596,7 @@ async function handleNewPasswordConfirmation(confirmPassword) {
             body: JSON.stringify({
                 reset_token: chatState.resetPasswordToken, // Use the token received from verify-otp
                 new_password: chatState.tempNewPassword,
-                confirm_password: confirmPassword,
+                confirm_password: confirmPassword, // Though backend should re-confirm, sending for completeness
             }),
         });
 
@@ -610,7 +667,7 @@ function showUserDetails() {
     }
 }
 
-// --- Orders Function - MODIFIED LOGIC ---
+// --- Orders Function ---
 async function fetchAndShowOrders() {
     addBotMessage("Redirecting to your orders page..."); // Immediate message
     setTimeout(() => {
@@ -628,64 +685,91 @@ function handleCartCommand() {
 }
 
 
+// --- MODIFIED FUNCTION: To fetch and display ALL products one by one in the chat ---
+async function fetchAndDisplayProductsInChat() {
+    // In a real application, you would fetch products from an API here:
+    // const response = await fetch('/api/products');
+    // const products = await response.json();
+
+    // For demonstration, using mockProducts
+    const products = mockProducts;
+
+    if (products.length === 0) {
+        addBotMessage("Currently, there are no products available.");
+        addBotMessage("Would you like to go to the **products page** anyway? (Type 'yes' or 'no')");
+        chatState.awaitingProductsPageConfirmation = true;
+        return;
+    }
+
+    addBotMessage("Here are our available products:");
+
+    // Use a loop with setTimeout to display products one by one
+    products.forEach((product, index) => {
+        setTimeout(() => {
+            addBotMessage(`**${product.name}** (Category: ${product.category}, Price: $${product.price.toFixed(2)})`);
+            addBotMessage(`  Description: ${product.description || 'No description available.'}`);
+            addBotMessage(`  Stock: ${product.stock_quantity > 0 ? product.stock_quantity : 'Out of Stock'}`);
+            // Add a small visual separator for clarity between products
+            if (index < products.length - 1) {
+                addBotMessage("---");
+            }
+        }, index * 1000); // 1-second delay per product
+    });
+
+    // After all products have been queued, add the confirmation message
+    // The timeout for this message should be after the last product's timeout
+    setTimeout(() => {
+        addBotMessage("Would you like to go to the **products page** for more details and to browse all items? (Type 'yes' or 'no')");
+        chatState.awaitingProductsPageConfirmation = true;
+    }, products.length * 1000); // This ensures it appears after the last product message
+}
+
 // --- Products Display (for products.html) ---
 async function showProductsOneByOne() {
     const productsContainer = document.getElementById('products-display-area');
 
     if (!productsContainer) {
         console.warn("Products display area (div with id='products-display-area') not found on this page. Cannot display products.");
+        addBotMessage("The products display area is not available on this page.");
         return;
     }
 
-    try {
-        const response = await fetch('/api/products');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const products = await response.json();
+    productsContainer.innerHTML = '<p>Fetching our available products...</p>'; // Add loading message
 
-        if (products.length === 0) {
-            productsContainer.innerHTML = '<p>No products available at the moment. Please check back later!</p>';
-            addBotMessage("Currently, there are no products available.");
-            return;
-        }
+    // In a real application, you would fetch products from an API here:
+    // const response = await fetch('/api/products');
+    // const products = await response.json();
 
-        productsContainer.innerHTML = ''; // Clear any loading message
-        addBotMessage("Here are our available products:");
+    // For demonstration, using mockProducts
+    const products = mockProducts;
 
-        products.forEach((product, index) => {
-            setTimeout(() => {
-                const productDiv = document.createElement('div');
-                productDiv.className = 'product-item'; // Add a class for styling
-                productDiv.innerHTML = `
-                    <img src="${product.image_url || '/placeholder.svg?height=200&width=200'}" alt="${product.name}" class="product-image">
-                    <h4>${product.name}</h4>
-                    <p>Category: ${product.category}</p>
-                    <p>Price: $${product.price.toFixed(2)}</p>
-                    <p>${product.description || 'No description available.'}</p>
-                    <p>Stock: ${product.stock_quantity > 0 ? product.stock_quantity : 'Out of Stock'}</p>
-                `;
-                productsContainer.appendChild(productDiv);
-                // Ensure the chat messages container also scrolls if new product messages are added there
-                const chatMessagesContainer = document.getElementById("chatMessages");
-                if (chatMessagesContainer) {
-                    chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
-                }
-            }, index * 1000); // 1-second delay per product
-        });
-    } catch (error) {
-        console.error('Error fetching and displaying products:', error);
-        productsContainer.innerHTML = '<p>Error loading products. Please try again later.</p>';
-        addBotMessage("I encountered an error while trying to fetch the product list. Please try again later.");
+    if (products.length === 0) {
+        productsContainer.innerHTML = '<p>No products available at the moment. Please check back later!</p>';
+        addBotMessage("Currently, there are no products available.");
+        return;
     }
-}
 
+    productsContainer.innerHTML = ''; // Clear loading message
+    addBotMessage("Here are our available products:"); // Bot message for the products page
 
-// Hamburger menu toggle
-function toggleMobileMenu() {
-    const navMenu = document.querySelector(".nav-menu");
-    const hamburger = document.querySelector(".hamburger");
-
-    navMenu.classList.toggle("active");
-    hamburger.classList.toggle("active");
+    products.forEach((product, index) => {
+        setTimeout(() => {
+            const productDiv = document.createElement('div');
+            productDiv.className = 'product-item'; // Add a class for styling
+            productDiv.innerHTML = `
+                <img src="${product.image_url || 'https://placehold.co/100x100/E0E0E0/000000?text=No+Image'}" alt="${product.name}" class="product-image">
+                <h4>${product.name}</h4>
+                <p>Category: ${product.category}</p>
+                <p>Price: $${product.price ? product.price.toFixed(2) : 'N/A'}</p>
+                <p>${product.description || 'No description available.'}</p>
+                <p>Stock: ${product.stock_quantity > 0 ? product.stock_quantity : 'Out of Stock'}</p>
+            `;
+            productsContainer.appendChild(productDiv);
+            // Ensure the chat messages container also scrolls if new product messages are added there
+            const chatMessagesContainer = document.getElementById("chatMessages");
+            if (chatMessagesContainer) {
+                chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+            }
+        }, index * 1000); // 1-second delay per product
+    });
 }

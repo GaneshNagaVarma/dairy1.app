@@ -1,793 +1,901 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: "Arial", sans-serif;
-  line-height: 1.6;
-  color: #333;
+    font-family: "Arial", sans-serif;
+    line-height: 1.6;
+    color: #333;
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 /* Navigation */
 .navbar {
-  background: #2c5530;
-  color: white;
-  padding: 1rem 0;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
+    background: #2c5530;
+    color: white;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
 }
 
 .nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .nav-logo {
-  display: flex;
-  align-items: center;
-  font-size: 1.5rem;
-  font-weight: bold;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 .nav-logo i {
-  margin-right: 10px;
-  font-size: 2rem;
+    margin-right: 10px;
+    font-size: 2rem;
+    color: white; /* Make the Font Awesome cow icon white in the navbar logo */
 }
 
 .nav-menu {
-  display: flex;
-  list-style: none;
-  gap: 2rem;
+    display: flex;
+    list-style: none;
+    gap: 2rem;
 }
 
 .nav-link {
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
 .nav-link:hover,
 .nav-link.active {
-  color: #90ee90;
+    color: #90ee90;
 }
 
 .cart-icon {
-  position: relative;
-  cursor: pointer;
-  font-size: 1.5rem;
+    position: relative;
+    cursor: pointer;
+    font-size: 1.5rem;
 }
 
 .cart-count {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background: #ff4444;
-  color: white;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff4444;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
 }
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(rgba(44, 85, 48, 0.7), rgba(44, 85, 48, 0.7)),
-    url("/placeholder.svg?height=600&width=1200");
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
+    background: linear-gradient(rgba(44, 85, 48, 0.7), rgba(44, 85, 48, 0.7)),
+        url("/placeholder.svg?height=600&width=1200"); /* Placeholder image, replace with your own farm image */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
 }
 
 .hero-content h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+    font-size: 3rem;
+    margin-bottom: 1rem;
 }
 
 .hero-content p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
 }
 
 .cta-button {
-  background: #90ee90;
-  color: #2c5530;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 5px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s;
+    background: #90ee90;
+    color: #2c5530;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
 .cta-button:hover {
-  background: #7fdd7f;
+    background: #7fdd7f;
 }
 
 /* Features Section */
 .features {
-  padding: 80px 0;
-  background: #f8f9fa;
+    padding: 80px 0;
+    background: #f8f9fa;
 }
 
 .features h2 {
-  text-align: center;
-  margin-bottom: 3rem;
-  font-size: 2.5rem;
-  color: #2c5530;
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    color: #2c5530;
 }
 
 .features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
 }
 
 .feature-card {
-  background: white;
-  padding: 2rem;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
 }
 
 .feature-card:hover {
-  transform: translateY(-5px);
+    transform: translateY(-5px);
 }
 
 .feature-card i {
-  font-size: 3rem;
-  color: #2c5530;
-  margin-bottom: 1rem;
+    font-size: 3rem;
+    color: #2c5530;
+    margin-bottom: 1rem;
 }
 
 .feature-card h3 {
-  margin-bottom: 1rem;
-  color: #2c5530;
+    margin-bottom: 1rem;
+    color: #2c5530;
 }
 
 /* Products Page */
 .products-page {
-  margin-top: 80px;
-  padding: 2rem 0;
+    margin-top: 80px;
+    padding: 2rem 0;
 }
 
 .product-categories {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
 }
 
 .category-btn,
 .filter-btn {
-  background: #f8f9fa;
-  border: 2px solid #2c5530;
-  color: #2c5530;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s;
+    background: #f8f9fa;
+    border: 2px solid #2c5530;
+    color: #2c5530;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 
 .category-btn.active,
 .filter-btn.active {
-  background: #2c5530;
-  color: white;
+    background: #2c5530;
+    color: white;
 }
 
 .products-grid,
 .shopping-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
 }
 
 .product-card {
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
+    transform: translateY(-5px);
 }
 
 .product-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
 }
 
 .product-info {
-  padding: 1.5rem;
+    padding: 1.5rem;
 }
 
 .product-info h3 {
-  margin-bottom: 0.5rem;
-  color: #2c5530;
+    margin-bottom: 0.5rem;
+    color: #2c5530;
 }
 
 .product-price {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #ff6b35;
-  margin: 1rem 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ff6b35;
+    margin: 1rem 0;
 }
 
 .product-actions {
-  display: flex;
-  gap: 1rem;
+    display: flex;
+    gap: 1rem;
 }
 
 .btn {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s;
-  text-decoration: none;
-  text-align: center;
-  flex: 1;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
+    text-align: center;
+    flex: 1;
 }
 
 .btn-primary {
-  background: #2c5530;
-  color: white;
+    background: #2c5530;
+    color: white;
 }
 
 .btn-primary:hover {
-  background: #1e3a21;
+    background: #1e3a21;
 }
 
 .btn-secondary {
-  background: #90ee90;
-  color: #2c5530;
+    background: #90ee90;
+    color: #2c5530;
 }
 
 .btn-secondary:hover {
-  background: #7fdd7f;
+    background: #7fdd7f;
 }
 
 /* About Page */
 .about-page {
-  margin-top: 80px;
-  padding: 2rem 0;
+    margin-top: 80px;
+    padding: 2rem 0;
 }
 
 .farm-story {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  margin: 3rem 0;
-  align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin: 3rem 0;
+    align-items: center;
 }
 
 .story-content h2 {
-  color: #2c5530;
-  margin-bottom: 1rem;
+    color: #2c5530;
+    margin-bottom: 1rem;
 }
 
 .story-image img {
-  width: 100%;
-  border-radius: 10px;
+    width: 100%;
+    border-radius: 10px;
 }
 
 .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin: 2rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
 }
 
 .gallery-item {
-  text-align: center;
+    text-align: center;
 }
 
 .gallery-item img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 1rem;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
 }
 
 .video-container {
-  text-align: center;
-  margin: 2rem 0;
+    text-align: center;
+    margin: 2rem 0;
 }
 
 .video-container video {
-  width: 100%;
-  max-width: 800px;
-  border-radius: 10px;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
 }
 
 .cert-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  margin: 2rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
 }
 
 .cert-item {
-  text-align: center;
-  padding: 2rem;
-  background: #f8f9fa;
-  border-radius: 10px;
+    text-align: center;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 10px;
 }
 
 .cert-item i {
-  font-size: 3rem;
-  color: #2c5530;
-  margin-bottom: 1rem;
+    font-size: 3rem;
+    color: #2c5530;
+    margin-bottom: 1rem;
 }
 
 /* Shopping Page */
 .shopping-page {
-  margin-top: 80px;
-  padding: 2rem 0;
+    margin-top: 80px;
+    padding: 2rem 0;
 }
 
 .shopping-filters {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
 }
 
 /* Cart Sidebar */
 .cart-sidebar {
-  position: fixed;
-  right: -400px;
-  top: 0;
-  width: 400px;
-  height: 100vh;
-  background: white;
-  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-  transition: right 0.3s;
-  z-index: 1001;
-  display: flex;
-  flex-direction: column;
+    position: fixed;
+    right: -400px;
+    top: 0;
+    width: 400px;
+    height: 100vh;
+    background: white;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
 }
 
 .cart-sidebar.open {
-  right: 0;
+    right: 0;
 }
 
 .cart-header {
-  padding: 1rem;
-  background: #2c5530;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    padding: 1rem;
+    background: #2c5530;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .close-cart {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 
 .cart-items {
-  flex: 1;
-  padding: 1rem;
-  overflow-y: auto;
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
 }
 
 .cart-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem 0;
-  border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
 }
 
 .cart-item img {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 5px;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 .cart-item-info {
-  flex: 1;
+    flex: 1;
 }
 
 .cart-item-info h4 {
-  margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .quantity-controls {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .quantity-btn {
-  background: #2c5530;
-  color: white;
-  border: none;
-  width: 25px;
-  height: 25px;
-  border-radius: 3px;
-  cursor: pointer;
+    background: #2c5530;
+    color: white;
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 3px;
+    cursor: pointer;
 }
 
 .cart-footer {
-  padding: 1rem;
-  border-top: 1px solid #eee;
+    padding: 1rem;
+    border-top: 1px solid #eee;
 }
 
 .cart-total {
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
 }
 
 .checkout-btn {
-  width: 100%;
-  background: #90ee90;
-  color: #2c5530;
-  border: none;
-  padding: 15px;
-  border-radius: 5px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
+    width: 100%;
+    background: #90ee90;
+    color: #2c5530;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 /* Modal */
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 1002;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    position: fixed;
+    z-index: 1002;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
-  background-color: white;
-  margin: 5% auto;
-  padding: 20px;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 600px;
-  position: relative;
+    background-color: white;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
 }
 
 .close {
-  position: absolute;
-  right: 20px;
-  top: 15px;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 /* Orders Page */
 .orders-page {
-  margin-top: 80px;
-  padding: 2rem 0;
+    margin-top: 80px;
+    padding: 2rem 0;
 }
 
 .order-card {
-  background: white;
-  border-radius: 10px;
-  padding: 2rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .order-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
 }
 
 .order-status {
-  padding: 5px 15px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
 }
 
 .status-pending {
-  background: #fff3cd;
-  color: #856404;
+    background: #fff3cd;
+    color: #856404;
 }
 
 .status-processing {
-  background: #d1ecf1;
-  color: #0c5460;
+    background: #d1ecf1;
+    color: #0c5460;
 }
 
 .status-shipped {
-  background: #d4edda;
-  color: #155724;
+    background: #d4edda;
+    color: #155724;
 }
 
 .status-delivered {
-  background: #d1ecf1;
-  color: #0c5460;
+    background: #d1ecf1;
+    color: #0c5460;
 }
 
 /* Auth Page */
 .auth-page {
-  margin-top: 80px;
-  padding: 2rem 0;
-  min-height: calc(100vh - 80px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f8f9fa;
+    margin-top: 80px;
+    padding: 2rem 0;
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
 }
 
 .auth-container {
-  background: white;
-  padding: 3rem;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
+    background: white;
+    padding: 3rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
 }
 
 .auth-form h2 {
-  text-align: center;
-  margin-bottom: 2rem;
-  color: #2c5530;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #2c5530;
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: #2c5530;
-  font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #2c5530;
+    font-weight: bold;
 }
 
 .form-group input,
 .form-group textarea,
 .form-group select {
-  width: 100%;
-  padding: 12px;
-  border: 2px solid #ddd;
-  border-radius: 5px;
-  font-size: 1rem;
-  transition: border-color 0.3s;
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
 }
 
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-  outline: none;
-  border-color: #2c5530;
+    outline: none;
+    border-color: #2c5530;
 }
 
 .auth-btn {
-  width: 100%;
-  background: #2c5530;
-  color: white;
-  border: none;
-  padding: 15px;
-  border-radius: 5px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s;
+    width: 100%;
+    background: #2c5530;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
 .auth-btn:hover {
-  background: #1e3a21;
+    background: #1e3a21;
 }
 
 .auth-form p {
-  text-align: center;
-  margin-top: 1rem;
+    text-align: center;
+    margin-top: 1rem;
 }
 
 .auth-form a {
-  color: #2c5530;
-  text-decoration: none;
+    color: #2c5530;
+    text-decoration: none;
 }
 
 .auth-form a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
-/* Chatbot */
+/* --- CHATBOT RELATED STYLES (WITH IAM BUJJI TEXT ANIMATION) --- */
 .chatbot-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
 }
 
 .chatbot-toggle {
-  width: 60px;
-  height: 60px;
-  background: #2c5530;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  transition: background 0.3s;
+    position: relative; /* Crucial for positioning the ::before pseudo-element */
+    width: 60px;
+    height: 60px;
+    /*background: #2c5530; /* Background color of the button */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s; /* Smooth hover effect for scaling */
 }
 
 .chatbot-toggle:hover {
-  background: #1e3a21;
+    transform: scale(1.1); /* Slightly enlarge the button on hover */
 }
 
+.chatbot-toggle span { /* Target the span (the emoji) inside your toggle div */
+    font-size: 35px; /* Adjust the size of the cow emoji here */
+    line-height: 1; /* Helps with vertical alignment of the emoji */
+    color: white; /* Ensures the emoji's default color is white if not using filter */
+    display: inline-block; /* Crucial for transform and animation to work correctly on emoji */
+    
+    /* Apply the pulsating glow animation directly to the span/emoji */
+    animation: standalone-cow-pulse 2s infinite ease-in-out;
+}
+
+/* Keyframes for the pulsating glow animation for the COW EMOJI */
+@keyframes standalone-cow-pulse {
+    0% {
+        filter: drop-shadow(0 0 5px rgba(144, 238, 144, 0.7)); /* Subtle green glow */
+        transform: scale(1);
+    }
+    50% {
+        filter: drop-shadow(0 0 20px rgba(144, 238, 144, 1)); /* Brighter, larger glow */
+        transform: scale(1.05); /* Slightly enlarge the cow */
+    }
+    100% {
+        filter: drop-shadow(0 0 5px rgba(144, 238, 144, 0.7)); /* Return to initial state */
+        transform: scale(1);
+    }
+}
+
+.chatbot-toggle::before {
+    content: "iam bujji"; /* The text you want to display */
+    position: absolute;
+    top: -30px; /* Adjust vertical position above the cow */
+    left: 50%;
+    transform: translateX(-50%); /* Center the text horizontally */
+    /*background-color: rgba(44, 85, 48, 0.9); /* Dark green background */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    white-space: nowrap; /* Prevent text from wrapping */
+    opacity: 0; /* Start invisible */
+    visibility: hidden; /* Hide from screen readers when not visible */
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* Smooth fade in/out */
+    z-index: 1001; /* Ensure it's above other elements if needed */
+
+    /* Apply an animation to make it appear/disappear with the cow's pulse */
+    animation: bujji-text-pulse 2s infinite ease-in-out;
+}
+
+/* Keyframes for the "iam bujji" text animation */
+@keyframes bujji-text-pulse {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-50%) translateY(0); /* Start slightly below */
+    }
+    25% { /* Appear shortly after the cow starts its brighter glow */
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(-5px); /* Move slightly up */
+    }
+    75% { /* Stay visible for most of the glow */
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(-5px);
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-50%) translateY(0); /* Fade out and return */
+    }
+}
+
+
 .chatbot {
-  position: absolute;
-  bottom: 70px;
-  right: 0;
-  width: 350px;
-  height: 500px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-  display: none;
-  flex-direction: column;
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    width: 350px;
+    height: 500px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
 }
 
 .chatbot.open {
-  display: flex;
+    display: flex;
 }
 
 .chatbot-header {
-  background: #2c5530;
-  color: white;
-  padding: 1rem;
-  border-radius: 10px 10px 0 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    background: #2c5530;
+    color: white;
+    padding: 1rem;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .chatbot-messages {
-  flex: 1;
-  padding: 1rem;
-  overflow-y: auto;
-  max-height: 350px;
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    max-height: 350px;
 }
 
 .bot-message,
 .user-message {
-  margin-bottom: 1rem;
-  padding: 10px;
-  border-radius: 10px;
-  max-width: 80%;
+    margin-bottom: 1rem;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
 }
 
 .bot-message {
-  background: #f1f1f1;
-  align-self: flex-start;
+    background: #f1f1f1;
+    align-self: flex-start;
 }
 
 .user-message {
-  background: #2c5530;
-  color: white;
-  align-self: flex-end;
-  margin-left: auto;
+    background: #2c5530;
+    color: white;
+    align-self: flex-end;
+    margin-left: auto;
 }
 
 .chatbot-input {
-  padding: 1rem;
-  border-top: 1px solid #eee;
-  display: flex;
-  gap: 0.5rem;
+    padding: 1rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 0.5rem;
 }
 
 .chatbot-input input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 .chatbot-input button {
-  background: #2c5530;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
+    /*background: #2c5530;*/
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
 }
+
+/* --- STANDALONE "BLOWING" ICON STYLES --- */
+/* Use this class on any <i> or <span> tag you want to give a blowing effect */
+.blowing-effect-icon {
+    display: inline-block; /* Crucial for transform and filter to work consistently */
+    font-size: 60px; /* Adjust as needed for the size of your icon */
+    line-height: 1; /* Helps with vertical alignment if it's an emoji */
+    text-align: center; /* Centers the icon if it's within a block parent */
+    /*color: #2c5530; /* Example: a default green color for the icon itself */
+
+    /* Apply the main blowing animation */
+    animation: icon-blow-pulse 2s infinite ease-in-out;
+}
+
+/* Keyframes for the generic icon blowing/pulsating effect */
+@keyframes icon-blow-pulse {
+    0% {
+        /*filter: drop-shadow(0 0 5px rgba(144, 238, 144, 0.7)); /* Subtle green glow */
+        transform: scale(1);
+    }
+    50% {
+        /*filter: drop-shadow(0 0 20px rgba(144, 238, 144, 1)); /* Brighter, larger glow */
+        transform: scale(1.05); /* Slightly enlarge the icon */
+    }
+    100% {
+        /*filter: drop-shadow(0 0 5px rgba(144, 238, 144, 0.7)); /* Return to subtle glow */
+        transform: scale(1);
+    }
+}
+
+/* (Optional) Example if you want a hover effect on it too */
+.blowing-effect-icon:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+    transition: transform 0.3s ease-in-out; /* Smooth transition for hover */
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .nav-menu {
-    display: none;
-  }
+    .nav-menu {
+        display: none;
+    }
 
-  .hero-content h1 {
-    font-size: 2rem;
-  }
+    .hero-content h1 {
+        font-size: 2rem;
+    }
 
-  .farm-story {
-    grid-template-columns: 1fr;
-  }
+    .farm-story {
+        grid-template-columns: 1fr;
+    }
 
-  .cart-sidebar {
-    width: 100%;
-    right: -100%;
-  }
+    .cart-sidebar {
+        width: 100%;
+        right: -100%;
+    }
 
-  .chatbot {
-    width: 300px;
-    height: 400px;
-  }
+    .chatbot {
+        width: 300px;
+        height: 400px;
+    }
 
-  .modal-content {
-    width: 95%;
-    margin: 10% auto;
-  }
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
 }
 
 @media (max-width: 480px) {
-  .container {
-    padding: 0 10px;
-  }
+    .container {
+        padding: 0 10px;
+    }
 
-  .hero-content h1 {
-    font-size: 1.5rem;
-  }
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
 
-  .hero-content p {
-    font-size: 1rem;
-  }
+    .hero-content p {
+        font-size: 1rem;
+    }
 
-  .features-grid,
-  .products-grid,
-  .shopping-grid {
-    grid-template-columns: 1fr;
-  }
+    .features-grid,
+    .products-grid,
+    .shopping-grid {
+        grid-template-columns: 1fr;
+    }
 
-  .chatbot {
-    width: 280px;
-    bottom: 60px;
-    right: -10px;
-  }
+    .chatbot {
+        width: 280px;
+        bottom: 60px;
+        right: -10px;
+    }
 }

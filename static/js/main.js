@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+
 // Check if user is logged in
 function checkLoginStatus() {
     const user = localStorage.getItem("currentUser");
@@ -678,17 +679,17 @@ async function handleLogout() {
 
 
 // --- User Details Function ---
+// --- User Details Function ---
 function showUserDetails() {
-    if (currentUser) {
-        addBotMessage(`Your Details:
-            Customer ID: ${currentUser.customer_id}
-            Username: ${currentUser.username}
-            Email: ${currentUser.email}
-            Phone: ${currentUser.phone}
-            Address: ${currentUser.address}`);
-    } else {
-        addBotMessage("I cannot show your details because you are not logged in.");
-    }
+    if (currentUser) {
+       /* addBotMessage(`Customer ID: ${currentUser.customer_id}`);*/
+        addBotMessage(`Username: ${currentUser.username}`);
+        addBotMessage(`Email: ${currentUser.email}`);
+        addBotMessage(`Phone: ${currentUser.phone}`);
+        addBotMessage(`Address: ${currentUser.address}`);
+    } else {
+        addBotMessage("I cannot show your details because you are not logged in.");
+    }
 }
 
 // --- Orders Function ---

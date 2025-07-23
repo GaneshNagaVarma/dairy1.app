@@ -8,7 +8,7 @@ function loadOrders() {
   if (!currentUser) {
     document.getElementById("ordersContainer").innerHTML = `
             <div style="text-align: center; padding: 2rem;">
-                <p>Please <a href="/login">login</a> to view your orders.</p>
+                <p>Please <a href="/login"class="btn btn-primary">login</a> to view your orders.</p>
             </div>
         `
     return

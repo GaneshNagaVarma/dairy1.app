@@ -1,3 +1,6 @@
+// Your Original Shopping.js Code
+// ---------------------------------------------------
+
 // Shopping cart
 let cart = []
 const products = []
@@ -9,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCartUI()
 })
 
-// Products data (same as products.js but with shopping functionality)
 const shoppingProductsData = [
   {
     id: 1,
@@ -132,13 +134,11 @@ function createShoppingProductCard(product) {
 }
 
 function filterShoppingProducts(category) {
-  // Update active button
   document.querySelectorAll(".filter-btn").forEach((btn) => {
     btn.classList.remove("active")
   })
   event.target.classList.add("active")
 
-  // Load filtered products
   loadShoppingProducts(category)
 }
 
@@ -206,11 +206,9 @@ function updateCartUI() {
   const cartItems = document.getElementById("cartItems")
   const cartTotal = document.getElementById("cartTotal")
 
-  // Update cart count
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0)
   cartCount.textContent = totalItems
 
-  // Update cart items
   cartItems.innerHTML = ""
 
   if (cart.length === 0) {
@@ -243,7 +241,6 @@ function updateCartUI() {
     cartItems.appendChild(cartItem)
   })
 
-  // Update total
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
   cartTotal.textContent = total.toFixed(2)
 }
@@ -285,7 +282,6 @@ function proceedToCheckout() {
     return
   }
 
-  // Check if user is logged in
   const currentUser = localStorage.getItem("currentUser")
   if (!currentUser) {
     showNotification("Please login to proceed with checkout")
@@ -300,7 +296,6 @@ function closeCheckoutModal() {
   document.getElementById("checkoutModal").style.display = "none"
 }
 
-// Handle payment method change
 document.addEventListener("DOMContentLoaded", () => {
   const paymentMethod = document.getElementById("paymentMethod")
   if (paymentMethod) {
@@ -315,7 +310,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 })
 
-// Handle checkout form submission
 document.addEventListener("DOMContentLoaded", () => {
   const checkoutForm = document.getElementById("checkoutForm")
   if (checkoutForm) {
@@ -335,7 +329,6 @@ function processOrder() {
     return
   }
 
-  // Create order
   const order = {
     id: "ORD" + Date.now(),
     items: [...cart],
@@ -344,34 +337,28 @@ function processOrder() {
     deliveryAddress: deliveryAddress,
     status: "pending",
     orderDate: new Date().toISOString(),
-    estimatedDelivery: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString(), // 2 days from now
+    estimatedDelivery: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString(),
   }
 
-  // Save order
   const orders = JSON.parse(localStorage.getItem("orders") || "[]")
   orders.push(order)
   localStorage.setItem("orders", JSON.stringify(orders))
 
-  // Clear cart
   cart = []
   saveCart()
   updateCartUI()
 
-  // Close modals
   closeCheckoutModal()
   toggleCart()
 
-  // Show success message
   showNotification("Order placed successfully! Order ID: " + order.id)
 
-  // Redirect to orders page
   setTimeout(() => {
     window.location.href = "/orders"
   }, 2000)
 }
 
 function showNotification(message) {
-  // Create notification element
   const notification = document.createElement("div")
   notification.style.cssText = `
         position: fixed;
@@ -388,13 +375,11 @@ function showNotification(message) {
 
   document.body.appendChild(notification)
 
-  // Remove notification after 3 seconds
   setTimeout(() => {
     document.body.removeChild(notification)
   }, 3000)
 }
 
-// Close modals when clicking outside
 window.addEventListener("click", (event) => {
   const productModal = document.getElementById("productModal")
   const checkoutModal = document.getElementById("checkoutModal")
@@ -407,3 +392,18 @@ window.addEventListener("click", (event) => {
     closeCheckoutModal()
   }
 })
+
+// ---------------------------------------------------
+// ✅ NEW FEATURE: Close cart when clicking outside
+document.addEventListener("click", function (event) {
+    const cartSidebar = document.getElementById("cartSidebar");
+    const cartIcon = document.querySelector(".cart-icon"); // Navbar cart icon
+
+    if (
+        cartSidebar.classList.contains("open") &&
+        !cartSidebar.contains(event.target) &&
+        !cartIcon.contains(event.target)
+    ) {
+        cartSidebar.classList.remove("open");
+    }
+});

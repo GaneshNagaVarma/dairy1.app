@@ -211,3 +211,59 @@ function showNotification(message, type = "info") {
         }, { once: true });
     }, 3000);
 }
+document.addEventListener("DOMContentLoaded", () => {
+    const userMenuContainer = document.getElementById("userMenuContainer");
+    const loginLink = document.getElementById("loginLink");
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+    if (currentUser) {
+        // Replace Login with Welcome dropdown
+        userMenuContainer.innerHTML = `
+            <div class="user-dropdown">
+                <button class="user-dropdown-btn">Welcome, ${currentUser.username} ▼</button>
+                <div class="user-dropdown-content">
+                    <a href="#" id="viewDetails">View Details</a>
+                    <a href="#" id="logoutBtn">Logout</a>
+                </div>
+            </div>
+        `;
+
+        // Toggle dropdown
+        const dropdownBtn = userMenuContainer.querySelector(".user-dropdown-btn");
+        const dropdown = userMenuContainer.querySelector(".user-dropdown");
+        dropdownBtn.addEventListener("click", () => {
+            dropdown.classList.toggle("show");
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", (e) => {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove("show");
+            }
+        });
+
+        // View Details click
+        document.getElementById("viewDetails").addEventListener("click", (e) => {
+            e.preventDefault();
+            alert(`
+                Username: ${currentUser.username}
+                Email: ${currentUser.email}
+                Phone: ${currentUser.phone}
+                Address: ${currentUser.address}
+            `);
+        });
+
+        // Logout click
+        document.getElementById("logoutBtn").addEventListener("click", (e) => {
+            e.preventDefault();
+            localStorage.removeItem("currentUser");
+            window.location.href = "/"; // Redirect to Home page
+        });
+    } else {
+        // User not logged in → Keep Login link
+        loginLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.location.href = "/login"; // Show login page
+        });
+    }
+});
